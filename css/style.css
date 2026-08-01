@@ -501,7 +501,7 @@ a {
   }
 
   .menu-button.is-open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
 
   .menu-button.is-open span:nth-child(2) {
@@ -509,7 +509,7 @@ a {
   }
 
   .menu-button.is-open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .site-navigation {
@@ -1054,5 +1054,24 @@ body.modal-open { overflow: hidden; }
     letter-spacing: clamp(.8px, .45vw, 2px);
     text-align: center;
     white-space: nowrap;
+  }
+}
+
+/* Mobile menu icon vertical alignment fix */
+@media (max-width: 768px) {
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .menu-button span {
+    width: 20px;
+    height: 2px;
+    margin: 3px 0;
+    flex: 0 0 auto;
+    transform-origin: 50% 50%;
   }
 }

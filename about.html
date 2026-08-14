@@ -3,53 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALEXATOR.COM | Official Electronic Music Project</title>
-  <meta name="description" content="Official website of ALEXATOR. Listen to original electronic music and watch official ALEXATOR music videos." />
+  <title>About ALEXATOR | ALEXATOR.COM</title>
+  <meta name="description" content="About ALEXATOR, an original electronic music project and continuously expanding numbered catalogue." />
   <meta name="author" content="ALEXATOR" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#050505" />
-  <link rel="canonical" href="https://alexator.com/" />
+  <link rel="canonical" href="https://alexator.com/about.html" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ALEXATOR.COM" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="ALEXATOR.COM" />
-  <meta property="og:description" content="Official website of ALEXATOR. Listen to original electronic music and watch official ALEXATOR music videos." />
-  <meta property="og:url" content="https://alexator.com/" />
+  <meta property="og:title" content="About ALEXATOR" />
+  <meta property="og:description" content="About ALEXATOR, an original electronic music project and continuously expanding numbered catalogue." />
+  <meta property="og:url" content="https://alexator.com/about.html" />
   <meta property="og:image" content="https://alexator.com/assets/images/open-graph.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ALEXATOR.COM" />
-  <meta name="twitter:description" content="Official website of ALEXATOR. Listen to original electronic music and watch official ALEXATOR music videos." />
+  <meta name="twitter:title" content="About ALEXATOR" />
+  <meta name="twitter:description" content="About ALEXATOR, an original electronic music project and continuously expanding numbered catalogue." />
   <meta name="twitter:image" content="https://alexator.com/assets/images/open-graph.jpg" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MusicGroup",
-  "name": "ALEXATOR",
-  "url": "https://alexator.com/",
-  "image": "https://alexator.com/assets/images/open-graph.jpg",
-  "logo": "https://alexator.com/assets/favicon-512.png",
-  "sameAs": [
-    "https://open.spotify.com/artist/6IQrb4azMGlgmtbxYtlEmX",
-    "https://music.apple.com/ru/artist/alexator/6794347574",
-    "https://www.youtube.com/@alexatorcom",
-    "https://www.tiktok.com/@alexatorcom",
-    "https://t.me/alexator_music"
-  ]
+  "@type": "AboutPage",
+  "name": "About ALEXATOR",
+  "url": "https://alexator.com/about.html",
+  "about": {
+    "@type": "MusicGroup",
+    "name": "ALEXATOR",
+    "url": "https://alexator.com/"
+  }
 }
 </script>
   <link rel="stylesheet" href="css/style.css?v=15" />
 </head>
-<body class="home-page">
+<body>
   <header class="site-header">
   <a class="site-logo" href="index.html">ALEXATOR.COM</a>
   <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span></span></button>
   <nav class="site-navigation" id="site-navigation" aria-label="Main navigation">
       <a href="music.html">Music</a>
       <a href="videos.html">Videos</a>
-      <a href="about.html">About</a>
+      <a href="about.html" aria-current="page">About</a>
       <a href="press.html">Press</a>
       <a href="contact.html">Contact</a>
   </nav>
@@ -63,18 +59,15 @@
   <a href="https://t.me/alexator_music" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><img class="social-icon" src="assets/icons/telegram.svg" alt="" aria-hidden="true"></a>
 </div>
 </header>
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <img class="hero-logo" src="assets/images/alexator-logo.png" alt="ALEXATOR.COM" />
-        <div class="hero-actions" aria-label="Choose ALEXATOR content">
-          <a class="hero-action-button" href="music.html">Listen to Music</a>
-          <a class="hero-action-button" href="videos.html">Watch Videos</a>
-        </div>
+  <main class="content-page">
+    <section class="about-section" id="about">
+      <div class="about-container">
+        <h1 class="section-title">About</h1>
+        <p class="about-text">Welcome to ALEXATOR.<br />This music is dedicated to all of you.</p>
       </div>
     </section>
   </main>
+  <footer class="site-footer"><p>© 2026 ALEXATOR.COM</p></footer>
   <script src="js/script.js?v=11"></script>
 </body>
 </html>

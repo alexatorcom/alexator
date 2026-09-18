@@ -1,5 +1,14 @@
 'use strict';
 
+/* Google Analytics 4 custom event helper */
+const sendAnalyticsEvent = (eventName, parameters = {}) => {
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', eventName, {
+    page_path: `${window.location.pathname}${window.location.search}${window.location.hash}`,
+    ...parameters,
+  });
+};
+
 /* ALEXATOR shared navigation */
 (() => {
   const menuButton = document.querySelector('.menu-button');
@@ -60,6 +69,14 @@
   const releaseSlugs = new Set(releaseArticles.map((release) => release.dataset.releaseSlug));
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   const shareText = 'Discover ALEXATOR! Original electronic music created to inspire, motivate and energize.';
+  const startedTracks = new WeakSet();
+
+  const getTrackAnalyticsData = (track) => ({
+    track_id: track?.dataset.trackNumber || '',
+    track_title: track?.querySelector('.music-track-title')?.textContent?.trim() || '',
+    release_slug: track?.dataset.releaseSlug || track?.closest('.music-release')?.dataset.releaseSlug || '',
+    track_context: track?.dataset.context || '',
+  });
 
   let activeTrack = null;
   let autoplayEnabled = false;
@@ -97,6 +114,7 @@
     const player = playerFor(track);
     if (audio && pause && !audio.paused) audio.pause();
     if (audio && reset) {
+      startedTracks.delete(track);
       try {
         audio.currentTime = 0;
       } catch (_error) {
@@ -183,6 +201,10 @@
     audio.addEventListener('play', () => {
       openTrack(track);
       setTrackButtonState(track, { isOpen: true, isPlaying: true });
+      if (!startedTracks.has(track)) {
+        startedTracks.add(track);
+        sendAnalyticsEvent('track_play', getTrackAnalyticsData(track));
+      }
     });
 
     // Native media controls must remain usable in Chromium-based browsers.
@@ -207,8 +229,21 @@
     });
 
     audio.addEventListener('ended', async () => {
+      sendAnalyticsEvent('track_complete', getTrackAnalyticsData(track));
       collapseTrack(track, { pause: false, reset: true });
       if (autoplayEnabled) await playNextTrack(track);
+    });
+  });
+
+  document.querySelectorAll('.music-track-download').forEach((link) => {
+    link.addEventListener('click', () => {
+      const track = link.closest('.music-track');
+      const fileName = link.getAttribute('download') || link.href.split('/').pop() || '';
+      sendAnalyticsEvent('track_download', {
+        ...getTrackAnalyticsData(track),
+        file_name: fileName,
+        file_url: link.href,
+      });
     });
   });
 
@@ -667,6 +702,35 @@
   });
 })();
 
+/* Press downloads analytics */
+(() => {
+  const downloadLinks = [...document.querySelectorAll('.mini-download-button, .press-button[download]')];
+  if (!downloadLinks.length) return;
+
+  downloadLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const downloadRow = link.closest('.music-download-row');
+      const modal = link.closest('.media-modal-dialog');
+      let fileName = link.getAttribute('download') || '';
+      if (!fileName) {
+        try {
+          fileName = new URL(link.href, window.location.href).pathname.split('/').pop() || '';
+        } catch (_error) {
+          fileName = '';
+        }
+      }
+      sendAnalyticsEvent('press_download', {
+        file_name: fileName,
+        item_title: downloadRow?.querySelector('.music-name')?.textContent?.trim()
+          || modal?.querySelector('h2')?.textContent?.trim()
+          || link.textContent.trim(),
+        download_category: downloadRow ? 'track_mp3' : 'press_asset',
+        file_url: link.href,
+      });
+    });
+  });
+})();
+
 /* ALEXATOR Music Videos catalogue */
 (() => {
   const player = document.querySelector('#featured-video');
@@ -678,6 +742,33 @@
   const description = document.querySelector('#featured-video-description');
   const youtubeLink = document.querySelector('#featured-youtube-link');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  let analyticsVideoStarted = false;
+  let analyticsVideoSource = '';
+
+  const getVideoAnalyticsData = () => {
+    const activeButton = buttons.find((button) => button.getAttribute('aria-pressed') === 'true') || buttons[0];
+    return {
+      video_id: activeButton?.dataset.number || '',
+      video_title: activeButton?.dataset.title || '',
+      video_url: activeButton?.dataset.src || player.currentSrc || '',
+    };
+  };
+
+  player.addEventListener('play', () => {
+    const data = getVideoAnalyticsData();
+    if (!analyticsVideoStarted || analyticsVideoSource !== data.video_url) {
+      analyticsVideoStarted = true;
+      analyticsVideoSource = data.video_url;
+      sendAnalyticsEvent('video_start', data);
+    }
+  });
+
+  player.addEventListener('ended', () => {
+    const data = getVideoAnalyticsData();
+    sendAnalyticsEvent('video_complete', data);
+    analyticsVideoStarted = false;
+    analyticsVideoSource = data.video_url;
+  });
 
   const selectVideo = (button, { updateHash = true, scrollToPlayer = false } = {}) => {
     const item = button.closest('.video-catalogue-item');
@@ -702,6 +793,8 @@
     player.setAttribute('aria-label', `ALEXATOR ${videoNumber} — ${videoTitle} official music video`);
 
     if (source && currentSource !== source) {
+      analyticsVideoStarted = false;
+      analyticsVideoSource = source;
       player.pause();
       player.poster = poster;
       const sourceElement = player.querySelector('source');

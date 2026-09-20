@@ -1,0 +1,724 @@
+/* ALEXATOR TRACKS — isolated track-page presentation */
+
+.track-detail-page {
+  min-width: 320px;
+  background: #030303;
+  overflow-x: hidden;
+}
+
+.track-detail-page button,
+.track-detail-page input {
+  font: inherit;
+}
+
+.track-page {
+  min-height: 100vh;
+}
+
+.track-stage {
+  --track-art: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+  padding-top: 82px;
+  isolation: isolate;
+  background-color: #050505;
+  background-image: var(--track-art);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: background-image .35s ease;
+}
+
+.track-stage-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .08) 0%, rgba(0, 0, 0, .04) 38%, rgba(0, 0, 0, .78) 74%, #030303 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, .22), transparent 32%, transparent 68%, rgba(0, 0, 0, .22));
+}
+
+.track-hero-copy {
+  width: min(94%, 1120px);
+  margin: auto auto 18px;
+  padding-top: clamp(210px, 37vh, 430px);
+  text-align: center;
+  text-shadow: 0 2px 16px #000, 0 0 28px rgba(0, 0, 0, .9);
+}
+
+.track-kicker {
+  display: block;
+  color: #fff7da;
+  font-size: clamp(16px, 1.7vw, 25px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .52em;
+  transform: translateX(.26em);
+}
+
+.track-hero-copy h1 {
+  margin: 7px 0 10px;
+  color: #fff3c7;
+  font-size: clamp(43px, 6.4vw, 96px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  transform: translateX(.065em);
+  filter: drop-shadow(0 0 8px rgba(255, 188, 54, .45));
+}
+
+.track-hero-play {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff3c7;
+  cursor: pointer;
+}
+
+.track-hero-play-icon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  padding-left: 6px;
+  border: 2px solid #fff3c7;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .58);
+  box-shadow: 0 0 20px rgba(244, 180, 0, .45), inset 0 0 18px rgba(244, 180, 0, .11);
+  font-size: 30px;
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.track-hero-play.is-playing .track-hero-play-icon {
+  padding-left: 0;
+  font-size: 28px;
+}
+
+.track-hero-play:hover .track-hero-play-icon,
+.track-hero-play:focus-visible .track-hero-play-icon {
+  background: #f4b400;
+  color: #050505;
+  transform: scale(1.05);
+  outline: none;
+}
+
+.track-hero-play-caption {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .31em;
+  text-transform: uppercase;
+}
+
+.track-interface {
+  width: 100%;
+  padding: 0 4.5% 18px;
+}
+
+.track-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, 920px);
+  margin: 0 auto 15px;
+}
+
+.track-detail-page .track-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 64px;
+  padding: 9px 8px;
+  border: 1px solid rgba(244, 180, 0, .72);
+  border-radius: 7px;
+  background: rgba(0, 0, 0, .66);
+  color: #fff7db;
+  font-family: var(--font-main);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .13em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.track-detail-page .track-action > span {
+  display: block;
+  font: inherit;
+  line-height: 1;
+}
+
+.track-action:hover,
+.track-action:focus-visible {
+  border-color: #ffd45c;
+  background: rgba(244, 180, 0, .16);
+  color: #fff;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.track-detail-page .track-action svg,
+.track-detail-page .track-action img {
+  display: block;
+  width: 23px;
+  height: 23px;
+  flex: 0 0 23px;
+  object-fit: contain;
+}
+
+.track-action svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.track-action img {
+  filter: invert(1) sepia(.2);
+}
+
+.track-detail-page .track-player {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  width: min(100%, 1120px);
+  min-height: 94px;
+  margin: 0 auto;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 212, 92, .47);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, .78);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, .28);
+  backdrop-filter: blur(9px);
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+  transition: none;
+}
+
+.track-player-art {
+  display: block;
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(255, 212, 92, .62);
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+.track-player-main {
+  min-width: 0;
+}
+
+.track-player-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 15px;
+  color: rgba(255, 255, 255, .76);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.track-player-heading strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.track-progress {
+  width: 100%;
+  height: 4px;
+  margin: 10px 0 8px;
+  appearance: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f4b400 var(--progress, 0%), rgba(255,255,255,.25) var(--progress, 0%));
+  cursor: pointer;
+}
+
+.track-progress::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  appearance: none;
+  border: 2px solid #fff4cc;
+  border-radius: 50%;
+  background: #f4b400;
+  box-shadow: 0 0 9px rgba(244,180,0,.8);
+}
+
+.track-progress::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fff4cc;
+  border-radius: 50%;
+  background: #f4b400;
+}
+
+.track-transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+
+.track-transport button {
+  min-width: 32px;
+  padding: 3px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.track-transport button:hover,
+.track-transport button:focus-visible {
+  color: #ffd45c;
+  outline: none;
+}
+
+.track-transport .track-player-play {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding-left: 4px;
+  border: 1px solid #ffd45c;
+  border-radius: 50%;
+  color: #fff3c7;
+}
+
+.track-transport .track-player-play.is-playing {
+  padding-left: 3px;
+}
+
+.tracks-autoplay {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 22px;
+  border-left: 1px solid rgba(255, 255, 255, .28);
+  color: #ffe9a0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tracks-autoplay input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.tracks-autoplay i {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 27px;
+  border: 1px solid #ffd45c;
+  border-radius: 30px;
+  background: #121212;
+}
+
+.tracks-autoplay i::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #777;
+  transition: left .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.tracks-autoplay input:checked + i::after {
+  left: 27px;
+  background: #fff;
+  box-shadow: 0 0 12px #f4b400;
+}
+
+.tracks-autoplay input:focus-visible + i {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.track-rail-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 1360px);
+  margin: 14px auto 8px;
+}
+
+.track-rail-heading h2,
+.track-rail-heading a {
+  margin: 0;
+  color: #ffe9a0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .26em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.track-rail-heading a:hover { color: #fff; }
+
+.track-rail {
+  display: flex;
+  gap: 11px;
+  width: min(100%, 1360px);
+  margin: 0 auto;
+  padding: 7px 6px 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: rgba(244,180,0,.55) rgba(255,255,255,.08);
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
+}
+
+.track-card {
+  display: flex;
+  flex: 0 0 126px;
+  flex-direction: column;
+  align-items: center;
+  min-height: 166px;
+  padding: 6px 6px 7px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .74);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  scroll-snap-align: start;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.track-card:hover,
+.track-card:focus-visible,
+.track-card.is-active {
+  border-color: #ffd45c;
+  background: rgba(244, 180, 0, .08);
+  outline: none;
+  transform: none;
+}
+
+.track-card.is-active {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 212, 92, .85),
+    inset 0 0 22px rgba(244, 180, 0, .12),
+    0 0 9px rgba(244, 180, 0, .36);
+}
+
+.track-card-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.track-card-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.track-card-number {
+  font-size: 9px;
+  letter-spacing: .18em;
+}
+
+.track-card-title {
+  display: -webkit-box;
+  min-height: 24px;
+  margin-top: 2px;
+  overflow: hidden;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.track-card-play {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: auto;
+  padding-left: 2px;
+  border: 1px solid #ffd45c;
+  border-radius: 50%;
+  color: #ffe9a0;
+  font-size: 7px;
+}
+
+.track-popover {
+  position: fixed;
+  z-index: 300;
+  width: min(240px, calc(100vw - 24px));
+  padding: 12px;
+  border: 1px solid rgba(244, 180, 0, .65);
+  border-radius: 8px;
+  background: rgba(5, 5, 5, .98);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .6);
+}
+
+.track-popover[hidden],
+.track-save-dialog[hidden] { display: none !important; }
+
+.track-popover p {
+  margin: 2px 4px 9px;
+  color: #ffe9a0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.track-popover button {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 0;
+  border-top: 1px solid rgba(244, 180, 0, .14);
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.track-popover button:hover,
+.track-popover button:focus-visible { color: #ffd45c; outline: none; }
+
+.track-save-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 310;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, .48);
+  backdrop-filter: blur(4px);
+}
+
+.track-save-card {
+  position: relative;
+  width: min(360px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(244, 180, 0, .72);
+  border-radius: 10px;
+  background: #080808;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .68);
+  text-align: center;
+}
+
+.track-dialog-close {
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.65);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.track-save-icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #ffd45c;
+  stroke-width: 1.5;
+}
+
+.track-save-card h2 {
+  margin: 12px 0 7px;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: .08em;
+}
+
+.track-save-card p {
+  margin: 0 0 20px;
+  color: rgba(255,255,255,.7);
+  font-size: 14px;
+}
+
+.track-copy-link {
+  width: 100%;
+  min-height: 45px;
+  border: 1px solid #f4b400;
+  border-radius: 5px;
+  background: rgba(244,180,0,.08);
+  color: #ffe9a0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.track-copy-link:hover,
+.track-copy-link:focus-visible { background: #f4b400; color: #050505; outline: none; }
+
+.track-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 400;
+  padding: 11px 18px;
+  border: 1px solid rgba(244,180,0,.7);
+  border-radius: 5px;
+  background: rgba(5,5,5,.96);
+  color: #fff;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.track-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+@media (min-width: 1400px) {
+  .track-stage { padding-top: 76px; }
+  .track-hero-copy { padding-top: 39vh; }
+}
+
+@media (max-width: 1120px) and (min-width: 769px) {
+  .track-interface { padding-inline: 24px; }
+  .track-hero-copy { padding-top: 34vh; }
+  .track-action { padding-inline: 8px; }
+}
+
+@media (max-width: 768px) {
+  .track-stage {
+    min-height: 100svh;
+    padding-top: 64px;
+    background-position: center top;
+    background-size: auto 590px;
+  }
+
+  .track-stage-shade {
+    background: linear-gradient(180deg, rgba(0,0,0,.04) 0, rgba(0,0,0,.06) 30%, rgba(0,0,0,.72) 48%, #030303 68%);
+  }
+
+  .track-hero-copy {
+    width: calc(100% - 24px);
+    margin: 0 auto 14px;
+    padding-top: 365px;
+  }
+
+  .track-kicker { font-size: 15px; }
+
+  .track-hero-copy h1 {
+    margin-block: 6px 11px;
+    font-size: clamp(30px, 10.8vw, 53px);
+    letter-spacing: .09em;
+  }
+
+  .track-hero-play-icon { width: 72px; height: 72px; font-size: 25px; }
+  .track-hero-play-caption { font-size: 11px; letter-spacing: .23em; }
+
+  .track-interface { padding: 0 10px 17px; }
+
+  .track-actions {
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .track-detail-page .track-action {
+    gap: 5px;
+    min-height: 70px;
+    padding: 7px 2px;
+    border-radius: 6px;
+    font-size: clamp(7px, 1.95vw, 8px);
+    letter-spacing: .06em;
+  }
+
+  .track-detail-page .track-action svg,
+  .track-detail-page .track-action img { width: 22px; height: 22px; flex-basis: 22px; }
+
+  .track-player {
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 11px;
+    padding: 10px;
+  }
+
+  .track-player-art { width: 82px; height: 82px; }
+
+  .track-player-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .track-player-heading strong { max-width: 100%; font-size: 11px; }
+  .track-progress { margin: 8px 0; }
+  .track-transport { gap: clamp(11px, 5vw, 23px); justify-content: flex-start; }
+  .track-transport button { font-size: 14px; }
+  .track-transport .track-player-play { width: 38px; height: 38px; }
+
+  .tracks-autoplay {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    padding: 9px 0 0;
+    border-top: 1px solid rgba(255,255,255,.16);
+    border-left: 0;
+  }
+
+  .track-rail-heading { margin-top: 13px; }
+  .track-card { flex-basis: 116px; min-height: 156px; }
+  .track-popover { right: 12px !important; left: 12px !important; bottom: 12px; top: auto !important; width: auto; max-height: 70vh; overflow-y: auto; }
+}
+
+@media (max-width: 420px) {
+  .track-stage { background-size: auto 530px; }
+  .track-hero-copy { padding-top: 330px; }
+  .track-hero-copy h1 { font-size: clamp(27px, 10.2vw, 43px); }
+  .track-player { grid-template-columns: 72px minmax(0, 1fr); }
+  .track-player-art { width: 72px; height: 72px; }
+  .track-transport { gap: 10px; }
+  .track-rail-heading h2, .track-rail-heading a { font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-stage,
+  .track-action,
+  .track-card,
+  .track-hero-play-icon,
+  .track-toast { transition: none; }
+}

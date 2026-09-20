@@ -306,10 +306,10 @@
   const saveMessage = () => {
     const ua = navigator.userAgent;
     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isIOS) return 'Нажмите Share → Add Bookmark';
-    if (/Android/i.test(ua)) return 'Откройте меню браузера ⋮ → Add to bookmarks';
-    if (/Macintosh|Mac OS X/i.test(ua)) return 'Нажмите ⌘ + D';
-    return 'Нажмите Ctrl + D';
+    if (isIOS) return 'Tap Share → Add Bookmark';
+    if (/Android/i.test(ua)) return 'Open the browser menu ⋮ → Add to bookmarks';
+    if (/Macintosh|Mac OS X/i.test(ua)) return 'Press ⌘ + D';
+    return 'Press Ctrl + D';
   };
 
   const closeSave = () => {

@@ -42,17 +42,28 @@
 }
 
 .track-hero-copy {
+  --track-kicker-size: clamp(16px, 1.7vw, 25px);
+  --track-title-size: clamp(43px, 6.4vw, 96px);
+  --track-title-line: clamp(42px, 6.28vw, 94px);
+  --track-title-double-line: clamp(84px, 12.56vw, 188px);
   width: min(94%, 1120px);
   margin: auto auto 18px;
-  padding-top: clamp(210px, 37vh, 430px);
+  padding-top: calc(clamp(210px, 37vh, 430px) - var(--track-title-line));
   text-align: center;
   text-shadow: 0 2px 16px #000, 0 0 28px rgba(0, 0, 0, .9);
+}
+
+.track-title-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: calc(var(--track-kicker-size) + 17px + var(--track-title-double-line));
 }
 
 .track-kicker {
   display: block;
   color: #fff7da;
-  font-size: clamp(16px, 1.7vw, 25px);
+  font-size: var(--track-kicker-size);
   font-weight: 500;
   line-height: 1;
   letter-spacing: .52em;
@@ -62,7 +73,7 @@
 .track-hero-copy h1 {
   margin: 7px 0 10px;
   color: #fff3c7;
-  font-size: clamp(43px, 6.4vw, 96px);
+  font-size: var(--track-title-size);
   font-weight: 500;
   line-height: .98;
   letter-spacing: .13em;
@@ -615,12 +626,12 @@
 
 @media (min-width: 1400px) {
   .track-stage { padding-top: 76px; }
-  .track-hero-copy { padding-top: 39vh; }
+  .track-hero-copy { padding-top: calc(39vh - var(--track-title-line)); }
 }
 
 @media (max-width: 1120px) and (min-width: 769px) {
   .track-interface { padding-inline: 24px; }
-  .track-hero-copy { padding-top: 34vh; }
+  .track-hero-copy { padding-top: calc(34vh - var(--track-title-line)); }
   .track-action { padding-inline: 8px; }
 }
 
@@ -637,16 +648,20 @@
   }
 
   .track-hero-copy {
+    --track-kicker-size: 15px;
+    --track-title-size: clamp(30px, 10.8vw, 53px);
+    --track-title-line: clamp(29px, 10.59vw, 52px);
+    --track-title-double-line: clamp(59px, 21.17vw, 104px);
     width: calc(100% - 24px);
     margin: 0 auto 14px;
-    padding-top: 365px;
+    padding-top: calc(365px - var(--track-title-line));
   }
 
   .track-kicker { font-size: 15px; }
 
   .track-hero-copy h1 {
     margin-block: 6px 11px;
-    font-size: clamp(30px, 10.8vw, 53px);
+    font-size: var(--track-title-size);
     letter-spacing: .09em;
   }
 
@@ -707,8 +722,12 @@
 
 @media (max-width: 420px) {
   .track-stage { background-size: auto 530px; }
-  .track-hero-copy { padding-top: 330px; }
-  .track-hero-copy h1 { font-size: clamp(27px, 10.2vw, 43px); }
+  .track-hero-copy {
+    --track-title-size: clamp(27px, 10.2vw, 43px);
+    --track-title-line: clamp(26px, 10vw, 42px);
+    --track-title-double-line: clamp(53px, 20vw, 84px);
+    padding-top: calc(330px - var(--track-title-line));
+  }
   .track-player { grid-template-columns: 72px minmax(0, 1fr); }
   .track-player-art { width: 72px; height: 72px; }
   .track-transport { gap: 10px; }

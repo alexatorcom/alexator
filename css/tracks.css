@@ -95,22 +95,37 @@
 }
 
 .track-hero-play-icon {
+  position: relative;
   display: grid;
   place-items: center;
   width: 84px;
   height: 84px;
-  padding-left: 6px;
+  padding-left: 0;
   border: 2px solid #fff3c7;
   border-radius: 50%;
   background: rgba(0, 0, 0, .58);
   box-shadow: 0 0 20px rgba(244, 180, 0, .45), inset 0 0 18px rgba(244, 180, 0, .11);
-  font-size: 30px;
+  font-size: 0;
   transition: transform .2s ease, background .2s ease, color .2s ease;
 }
 
-.track-hero-play.is-playing .track-hero-play-icon {
-  padding-left: 0;
-  font-size: 28px;
+.track-hero-play-icon::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 21px solid currentColor;
+}
+
+.track-hero-play.is-playing .track-hero-play-icon::before {
+  width: 18px;
+  height: 26px;
+  margin-left: 0;
+  border: 0;
+  background: linear-gradient(90deg, currentColor 0 6px, transparent 6px 12px, currentColor 12px 18px);
 }
 
 .track-hero-play:hover .track-hero-play-icon,
@@ -479,16 +494,28 @@
 }
 
 .track-card-play {
+  position: relative;
   display: grid;
   place-items: center;
   width: 22px;
   height: 22px;
   margin-top: auto;
-  padding-left: 2px;
+  padding-left: 0;
   border: 1px solid #ffd45c;
   border-radius: 50%;
   color: #ffe9a0;
-  font-size: 7px;
+  font-size: 0;
+}
+
+.track-card-play::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid currentColor;
 }
 
 .track-popover {

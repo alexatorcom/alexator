@@ -97,7 +97,10 @@ const sendAnalyticsEvent = (eventName, parameters = {}) => {
     const actionLabel = isPlaying ? 'Pause' : 'Play';
     button.setAttribute('aria-expanded', String(isOpen));
     button.setAttribute('aria-label', `${actionLabel} ALEXATOR ${track.dataset.trackNumber} — ${track.querySelector('.music-track-title')?.textContent?.trim() || 'track'}`);
-    if (icon) icon.textContent = isPlaying ? 'Ⅱ' : '▶';
+    if (icon) {
+      icon.textContent = '';
+      icon.classList.toggle('is-pause', isPlaying);
+    }
     if (label) label.textContent = isPlaying ? 'PAUSE' : 'PLAY';
   };
 

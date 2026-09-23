@@ -68,9 +68,11 @@
   const canonical = document.querySelector('link[rel="canonical"]');
   const metaDescription = document.querySelector('meta[name="description"]');
   const ogTitle = document.querySelector('meta[property="og:title"]');
+  const ogDescription = document.querySelector('meta[property="og:description"]');
   const ogUrl = document.querySelector('meta[property="og:url"]');
   const ogImage = document.querySelector('meta[property="og:image"]');
   const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
   const twitterImage = document.querySelector('meta[name="twitter:image"]');
 
   if (!audio || !heroPlay) return;
@@ -129,20 +131,22 @@
 
   const setPlayState = (playing) => {
     heroPlay.classList.toggle('is-playing', playing);
-    heroPlayIcon.textContent = playing ? 'Ⅱ' : '▶';
+    heroPlayIcon.textContent = '';
     heroPlayCaption.textContent = playing ? 'Pause' : 'Play full track';
     heroPlay.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} ${currentTrack().title}`);
   };
 
   const updateMetadata = (track) => {
-    const description = `Listen to ALEXATOR ${track.id} — ${track.title}. Stream, download and explore the official track artwork.`;
+    const description = `Listen to ALEXATOR ${track.id} — ${track.title}. Stream online and download for free.`;
     document.title = `ALEXATOR ${track.id} — ${track.title} | Official Track`;
     canonical?.setAttribute('href', track.url);
     metaDescription?.setAttribute('content', description);
     ogTitle?.setAttribute('content', `ALEXATOR - ${track.title}`);
+    ogDescription?.setAttribute('content', description);
     ogUrl?.setAttribute('content', track.url);
     ogImage?.setAttribute('content', `https://alexator.com${track.image}`);
     twitterTitle?.setAttribute('content', `ALEXATOR - ${track.title}`);
+    twitterDescription?.setAttribute('content', description);
     twitterImage?.setAttribute('content', `https://alexator.com${track.image}`);
   };
 

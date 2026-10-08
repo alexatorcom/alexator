@@ -6,7 +6,11 @@
   </url>
   <url>
     <loc>https://alexator.com/music.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/music/alexator-021-025/</loc>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://alexator.com/music/alexator-016-020/</loc>
@@ -34,7 +38,7 @@
   </url>
   <url>
     <loc>https://alexator.com/press.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-08</lastmod>
   </url>
   <url>
     <loc>https://alexator.com/contact.html</loc>
@@ -119,5 +123,25 @@
   <url>
     <loc>https://alexator.com/tracks/020-just-relax/</loc>
     <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/tracks/021-adrenaline/</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/tracks/022-kindred-soul/</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/tracks/023-to-the-stars/</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/tracks/024-words-unsaid/</loc>
+    <lastmod>2026-10-08</lastmod>
+  </url>
+  <url>
+    <loc>https://alexator.com/tracks/025-pain-and-love/</loc>
+    <lastmod>2026-10-08</lastmod>
   </url>
 </urlset>

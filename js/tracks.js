@@ -26,6 +26,11 @@
     ['018', 'Endless Sands', '018-endless-sands', '5:29', '2e0nFBhCqKFZAjjQXh69yf', 'endless-sands/6810512644'],
     ['019', 'Never Let Go', '019-never-let-go', '3:38', '0ZHAZVDGcvkzTUa1ylFmBr', 'never-let-go/6810512645'],
     ['020', 'Just Relax', '020-just-relax', '4:44', '7Ca9jWvhEuT3sJBsXzE6u8', 'just-relax/6810512646'],
+    ['021', 'Adrenaline', '021-adrenaline', '3:09', '0lUgriS371cZU5TRjmc8ji', 'adrenaline/6820321405'],
+    ['022', 'Kindred Soul', '022-kindred-soul', '3:10', '3QAxBpmjUXSiDjbcQ3H1Hr', 'kindred-soul/6820321406'],
+    ['023', 'To the Stars', '023-to-the-stars', '3:02', '051uIF8gKeygGkRQY9Ys8s', 'to-the-stars/6820321407'],
+    ['024', 'Words Unsaid', '024-words-unsaid', '4:28', '4hy8rvvqQHsHpkNo8ZLyWr', 'words-unsaid/6820321408'],
+    ['025', 'Pain and Love', '025-pain-and-love', '3:52', '7yDoO0IF5Wc23VIjdRuCky', 'pain-and-love/6820321409'],
   ].map(([id, title, slug, duration, spotifyId, applePath], index) => {
     const filename = `${id}-${title.replaceAll(' ', '-')}`;
     const releaseStart = Math.floor(index / 5) * 5 + 1;

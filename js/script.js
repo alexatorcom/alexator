@@ -744,9 +744,31 @@ const sendAnalyticsEvent = (eventName, parameters = {}) => {
   const title = document.querySelector('#featured-video-title');
   const description = document.querySelector('#featured-video-description');
   const youtubeLink = document.querySelector('#featured-youtube-link');
+  const downloadLink = document.querySelector('#featured-download-link');
+  const trackLink = document.querySelector('#featured-track-link');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   let analyticsVideoStarted = false;
   let analyticsVideoSource = '';
+
+  const getTrackLinks = (trackNumber, trackTitle) => {
+    const trackId = String(trackNumber || '').padStart(3, '0');
+    const titleSlug = String(trackTitle || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    const downloadTitle = String(trackTitle || '').trim().replace(/\s+/g, '-');
+    const trackIndex = Number.parseInt(trackId, 10);
+    const releaseStart = Number.isFinite(trackIndex) ? Math.floor((trackIndex - 1) / 5) * 5 + 1 : 1;
+    const releaseEnd = releaseStart + 4;
+
+    return {
+      downloadFilename: `${trackId}-${downloadTitle}.mp3`,
+      downloadUrl: `https://media.alexator.com/download/${trackId}-${downloadTitle}.mp3`,
+      releaseSlug: `alexator-${String(releaseStart).padStart(3, '0')}-${String(releaseEnd).padStart(3, '0')}`,
+      trackPath: `/tracks/${trackId}-${titleSlug}/`,
+    };
+  };
 
   const getVideoAnalyticsData = () => {
     const activeButton = buttons.find((button) => button.getAttribute('aria-pressed') === 'true') || buttons[0];
@@ -781,6 +803,7 @@ const sendAnalyticsEvent = (eventName, parameters = {}) => {
     const source = button.dataset.src || '';
     const poster = button.dataset.poster || '';
     const youtube = button.dataset.youtube || 'https://www.youtube.com/@alexatorcom';
+    const trackLinks = getTrackLinks(videoNumber, videoTitle);
     const currentSource = player.querySelector('source')?.getAttribute('src') || player.getAttribute('src') || '';
 
     buttons.forEach((candidate) => {
@@ -793,6 +816,14 @@ const sendAnalyticsEvent = (eventName, parameters = {}) => {
     if (title) title.textContent = videoTitle;
     if (description) description.textContent = videoDescription;
     if (youtubeLink) youtubeLink.href = youtube;
+    if (downloadLink) {
+      downloadLink.href = trackLinks.downloadUrl;
+      downloadLink.download = trackLinks.downloadFilename;
+      downloadLink.dataset.trackId = videoNumber;
+      downloadLink.dataset.trackTitle = videoTitle;
+      downloadLink.dataset.releaseSlug = trackLinks.releaseSlug;
+    }
+    if (trackLink) trackLink.href = trackLinks.trackPath;
     player.setAttribute('aria-label', `ALEXATOR ${videoNumber} — ${videoTitle} official music video`);
 
     if (source && currentSource !== source) {
@@ -819,6 +850,18 @@ const sendAnalyticsEvent = (eventName, parameters = {}) => {
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => selectVideo(button, { scrollToPlayer: true }));
+  });
+
+  downloadLink?.addEventListener('click', () => {
+    sendAnalyticsEvent('track_download', {
+      track_id: downloadLink.dataset.trackId || '',
+      track_title: downloadLink.dataset.trackTitle || '',
+      release_slug: downloadLink.dataset.releaseSlug || '',
+      track_context: 'videos',
+      download_category: 'track',
+      file_name: downloadLink.download || '',
+      file_url: downloadLink.href || '',
+    });
   });
 
   const hashId = window.location.hash.slice(1);
